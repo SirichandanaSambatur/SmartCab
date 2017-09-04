@@ -38,8 +38,8 @@ class LearningAgent(Agent):
             #self.epsilon = self.epsilon - 0.05
              self.epsilon_t += 1.0
             #self.epsilon = 1.0/(self.epsilon_t**2)
-            #self.epsilon=math.power(self.alpha,self.epsilon_t)
-             self.epsilon = math.fabs(math.cos(self.alpha*self.epsilon_t))
+             self.epsilon=math.pow(self.alpha,self.epsilon_t)
+             #self.epsilon = math.fabs(math.cos(self.alpha*self.epsilon_t))
         return None
 
     def build_state(self):
@@ -125,7 +125,7 @@ def run():
     agent = env.create_agent(LearningAgent,learning=True,alpha=0.95,epsilon=0.5)
     env.set_primary_agent(agent,enforce_deadline=True)
     sim = Simulator( env,update_delay=0.015,log_metrics=True,optimized=True)
-    sim.run(n_test=10,tolerance=0.01)
+    sim.run(n_test=10,tolerance=0.001)
 
 
 if __name__ == '__main__':
